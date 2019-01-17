@@ -1,0 +1,30 @@
+
+
+body {
+	background-color: #ff8a5b;
+}
+.jumbotron{
+	display: block;
+    text-align: center;
+}
+.forma{
+	
+}
+.margenes{
+	margin-left:44%;
+}
+#margen{
+	width:70% !important;
+	margin:auto;
+	border-radius:5px;
+}
+.titulo{
+	padding auto;
+	text-align:center;
+}
+.noticia{
+	padding-left:5%;
+	padding-right:5%;
+	text-align:justify !important;
+	font-weight: bold;
+}
