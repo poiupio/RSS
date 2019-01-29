@@ -6,6 +6,8 @@
   <title>Añadir</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="estilos.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script> 
 </head>
 <body onload="clear2()">
 	<div class="jumbotron">
@@ -46,7 +48,7 @@
 		
 		
 	?>
-	<a class="margenes"><button class="btn btn-success" onclick="myFunction()">Descargar excel</button></a><br><br><br>
+	<a class="margenes"><button class="btn btn-success" id="descargar" onclick="myFunction()">Descargar excel</button></a><br><br><br>
 </body>
 
 <script>
@@ -86,42 +88,15 @@
 		  } 
 		};
 		
-		////////////
-			
-		$('#indice').val() = indice;
-
-		if(typeof indice !== 'undefined') {
-			//send txt to the server
-			//notice the function at the end. this gets called after the data has been sent
-			$.post('<?php echo base_url('admin/js2php_proc'); ?>', {'text':indice}, function(data){
-				//Now data is an object, so put the message in the div
-				$('#response').text(data.message);
-			}, 'json');
-		}
-		
-		
-		///////////
-		
+		$( document ).ready(function() { 
+			$("#descargar").load("descargarExl.php",{indice}); 
+		}); 
+		 
 		clear2();
-	}		
+	}	
+	 
+	
 </script>
-<?php
-	
-	function js2php_proc() {
-		if(!empty($_POST)){
-		    //start an output var
-		    $output = array();
-		
-		    //do any processing here.
-		    //$output['message'] = "Array successfully sent!";
-		    $output['message'] = $_POST['jsarray'];
-		
-		    //send the output back to the client
-		    echo json_encode($output);
-		}
-	}
-	
-?>
 </html>
 
 
