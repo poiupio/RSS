@@ -27,6 +27,7 @@ echo '<!DOCTYPE html>
 	<script type="text/javascript" src="jquery-1.12.1.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="jquery-ui.css">
 	<script type="text/javascript" src="jquery-ui.js"></script>
+	<script type="text/javascript" src="autocomplete.js"></script>
 	</head>
 <body>
 
@@ -56,15 +57,16 @@ echo '<!DOCTYPE html>
 	</div>
 	<br>
 	<br>
-
-    <script type="text/javascript">
-		$(document).ready(function () {
-			var items = <?= json_encode($array) ?>;
-			$("#busqueda").autocomplete({
-				source: items,
-			});
+	
+	<script>
+	$(document).ready(function () {
+		var items = '.json_encode($array).';
+		$("#busqueda").autocomplete({
+			source: items,
 		});
-	</script>';
+	});
+	</script>
+	';
 
 	$consulta = "SELECT * FROM entradas ORDER BY Fecha desc";
     $respuesta = mysqli_query( $conexion, $consulta ) or die ( "Algo ha ido mal en la consulta a la base de datos");
