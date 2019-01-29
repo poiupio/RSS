@@ -1,9 +1,11 @@
 <?php
+
 $navegador = get_browser(null, true);
 if ($navegador['browser'] != 'Firefox') {
 	header("HTTP/1.0 403 Not Found");
 	echo "HTTP/1.0 403 Not Found";
 } else {
+
     include("configDB.php");
 	$result = mysqli_query($conexion, "SELECT * FROM entradas");
 	$array = array();
@@ -62,8 +64,8 @@ echo '<!DOCTYPE html>
 				source: items,
 			});
 		});
-	</script>
-';
+	</script>';
+
 	$consulta = "SELECT * FROM entradas ORDER BY Fecha desc";
     $respuesta = mysqli_query( $conexion, $consulta ) or die ( "Algo ha ido mal en la consulta a la base de datos");
     $i=0;
@@ -74,8 +76,7 @@ echo '<!DOCTYPE html>
 		"</div><br/><br/>";
         $i++;
     }
-	echo '</body>
-	</html>';
+	echo '</body></html>';
 }
-?>
 
+?>
