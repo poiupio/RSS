@@ -1,7 +1,7 @@
 <?php
 
 $navegador = get_browser(null, true);
-if ($navegador['browser'] != 'Firefox') {
+if ($navegador['browser'] == 'Chrome') {
 	header("HTTP/1.0 403 Not Found");
 	echo "HTTP/1.0 403 Not Found";
 } else {

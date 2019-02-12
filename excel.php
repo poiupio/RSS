@@ -73,24 +73,26 @@
 	}	
 		
 	function myFunction() {
-		
+		var url="descargarExl.php?";
 		var checkBox = new Array();
 		checkBox = document.getElementsByClassName("Check");
 		
 		var i;
-		var index=0;
-		var indice = new Array();
+		var j=0;
 		
 		for(i=0;i<checkBox.length;i++){
 		  if (checkBox[i].checked == true && checkBox[i]!== 'undefined'){
-			indice[index]=checkBox[i].value;
-			index++;
+			if(i==0){
+				url=url.concat("indice["+j+"]=".concat(checkBox[i].value));
+				j++;
+			}else{
+				url=url.concat("&indice["+j+"]=".concat(checkBox[i].value));
+				j++;
+			}
 		  } 
 		};
 		
-		$( document ).ready(function() { 
-			$("#descargar").load("descargarExl.php",{indice}); 
-		}); 
+		location.href=url; 
 		 
 		clear2();
 	}	
