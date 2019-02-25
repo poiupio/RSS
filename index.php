@@ -1,22 +1,4 @@
-<?php
-
-$navegador = get_browser(null, true);
-if ($navegador['browser'] == 'Chrome') {
-	header("HTTP/1.0 403 Not Found");
-	echo "HTTP/1.0 403 Not Found";
-} else {
-
-    include("configDB.php");
-	$result = mysqli_query($conexion, "SELECT * FROM entradas");
-	$array = array();
-	if($result){
-		while ($row = mysqli_fetch_array($result)) {
-			$titulo = $row['Titulo'];
-			array_push($array, $titulo);
-		}
-	}
-
-echo '<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
@@ -39,6 +21,12 @@ echo '<!DOCTYPE html>
 					<li><a href="excel.php">Excel</a></li>
 				</ul>
 			</li>
+			<li><a>Ordenar</a>
+				<ul>
+					<li><a id="sortFecha">Fecha</a></li>
+					<li><a id="sortTitulo">Titulo</a></li>
+				</ul>
+			</li>
 		</ul>
 	</div>
 
@@ -57,18 +45,49 @@ echo '<!DOCTYPE html>
 	</div>
 	<br>
 	<br>
+	<div id="noticias">
+	
+	</div>
 	
 	<script>
+	window.onload = function() {
+	document.getElementById("noticias").innerHTML = '<?php echo imprimir("ORDER BY Fecha desc") ?>';
+		
+	
+	document.getElementById("sortTitulo").addEventListener("click", function(){
+		document.getElementById("noticias").innerHTML = '<?php imprimir("ORDER BY Titulo desc") ?>';
+	});
+	document.getElementById("sortFecha").addEventListener("click", function(){
+		document.getElementById("noticias").innerHTML = '<?php imprimir("ORDER BY Fecha desc") ?>';
+	});
+	}
+	
 	$(document).ready(function () {
-		var items = '.json_encode($array).';
+		
+		
+		var items = json_encode($array);
 		$("#busqueda").autocomplete({
 			source: items,
 		});
 	});
+	
 	</script>
-	';
 
-	$consulta = "SELECT * FROM entradas ORDER BY Fecha desc";
+<?php
+
+function imprimir($parametros){
+	include("configDB.php");
+	$result = mysqli_query($conexion, "SELECT * FROM entradas");
+	$array = array();
+	if($result){
+		while ($row = mysqli_fetch_array($result)) {
+			$titulo = $row['Titulo'];
+			array_push($array, $titulo);
+		}
+	}
+	
+	
+	$consulta = 'SELECT * FROM entradas '.$parametros;
     $respuesta = mysqli_query( $conexion, $consulta ) or die ( "Algo ha ido mal en la consulta a la base de datos");
     $i=0;
 	
@@ -78,7 +97,6 @@ echo '<!DOCTYPE html>
 		"</div><br/><br/>";
         $i++;
     }
-	echo '</body></html>';
+	
 }
-
-?>
+?> 

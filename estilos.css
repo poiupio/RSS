@@ -36,18 +36,25 @@ ul, ol {
 .header{
 	float:top;
 }
-
+.nav {
+	background-color:#efeded;
+}
 .nav > li {
-	width:100%;
+	background-color:#gray;
+	display: inline-block;
+	margin:0;
+	width:10%;
 }
 
 .nav li a {
-	background-color:#efeded;
+	background-color:#gray;
 	color:#000;
 	padding:10px 12px;
 	display:block;
+	
 	border-left:solid .2px black;
 	border-right:solid .2px black;
+	border-bottom:solid .2px black;
 
 }
 
